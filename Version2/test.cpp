@@ -32,7 +32,7 @@ hls::stream<ap_uint<16>>matrixa("Matrix a");
 hls::stream<ap_uint<16>>matrixb("Matrix B");
 hls::stream<ap_uint<16>>matrixbcsc("Matrix B CSC");
 hls::stream<ap_uint<16>>outmatr("Out Matrix");
-int pp=0,k,q,jj=0;
+int pp=0,k,q,z,jj=0;
 int count3;
 int row_countmetric;
 int row_w;
@@ -42,7 +42,7 @@ int kk=0;
 int index5=0;
 int row_weight1[size];
 
-ap_uint<16>Final[size][size];
+ap_uint<16>Final[size][2*size];
 
 
 
@@ -255,16 +255,53 @@ for (int i=0;i<size;i++)
 //csrmul(matrixa,matrixb,csc,matrixbcsc,outmatr);
 csrmul(matrixa,matrixbcsc,outmatr);
 ofstream myfilestream ("Outputsteam.txt");
-
+#ifdef DEBUG
 for(int i=0;i<size;i++)
 		{
-	for (int j=0;j<size;j++)
+	for (int j=0;j<2*size;j++)
 	{
+
 		Final[i][j]=outmatr.read();
 		myfilestream<<"Output"<<"["<<i<<"]"<<"["<<j<<"]"<<"="<<Final[i][j]<<"\n";
 	}
 		}
 
+myfilestream.close();
+#endif
+
+for (int i=0; i<size;i++)
+{
+	for (int j=0; j<size;j++)
+	{
+		Final[i][j]=0;
+
+	}
+}
+for(int i=0;i<size;i++)
+{
+	 z=0;
+	for (int j=0;j<2*size;j++)
+	{
+		if (z<size)
+		{
+			Final[i][j]+=outmatr.read();
+			z++;
+		}
+		else
+		{
+			Final[i][j-z]+=outmatr.read();
+		}
+	}
+}
+
+for (int i=0; i<size;i++)
+{
+	for (int j=0; j<size;j++)
+	{
+		myfilestream<<"Output"<<"["<<i<<"]"<<"["<<j<<"]"<<"="<<Final[i][j]<<"\n";
+
+	}
+}
 myfilestream.close();
 
 for (int i=0; i<size;i++)
@@ -278,10 +315,10 @@ for (int i=0; i<size;i++)
 		}
 	}
 }
-int null =(size*size)-pp;
-std::cout<<"Sparsity ="<<((null/(size*size)))<<"\n";
+
+
 std::cout<<"Test Passed"<<"\n";
-std::cout<<"No of elements="<<pp<<"\n";
+std::cout<<"No of non zero elements="<<pp<<"\n";
 
 return 0;
 }

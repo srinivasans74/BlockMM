@@ -1,4 +1,4 @@
-#define size 4
+#define size 720
 
 
 #if size==4
@@ -23,4 +23,12 @@
 #elif size==256
 #define dim 512
 #define streamlength 16
+#elif size==512
+#define dim 1024
+#define streamlength 16
+#elif size==720
+#define dim 1440
+#define streamlength 16
+
+
 #endif

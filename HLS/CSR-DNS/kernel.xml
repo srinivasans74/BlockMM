@@ -1,0 +1,22 @@
+<root versionMajor="1" versionMinor="5">
+    <kernel name="csrmul" language="c" vlnv="xilinx.com:hls:csrmul:1.0" attributes="" hash="" preferredWorkGroupSizeMultiple="0" workGroupSize="1" debug="false" compileOptions="" profileType="" hwControlProtocol="ap_ctrl_chain" interrupt="true">
+        <ports>
+            <port name="INA_V" mode="read_only" dataWidth="16" portType="stream"/>
+            <port name="INB_V" mode="write_only" dataWidth="16" portType="stream"/>
+            <port name="INCSC_V" mode="read_only" dataWidth="16" portType="stream"/>
+            <port name="ROW_KERNEL_V" mode="read_only" dataWidth="16" portType="stream"/>
+            <port name="OUT_V" mode="write_only" dataWidth="16" portType="stream"/>
+            <port name="S_AXI_CONTROL" portType="addressable" mode="slave" base="0x0" range="0x1000" dataWidth="32"/>
+        </ports>
+        <args>
+            <arg id="0" name="ina" addressQualifier="4" port="INA_V" hostOffset="0x0" hostSize="0x8" offset="0x0" size="0x8" type="stream&lt;ap_uint&lt;16&gt;, 0&gt;&amp;" memSize="0x2" origName="ina" origUse="variable"/>
+            <arg id="1" name="inb" addressQualifier="4" port="INB_V" hostOffset="0x0" hostSize="0x8" offset="0xC" size="0x8" type="stream&lt;ap_uint&lt;16&gt;, 0&gt;&amp;" origName="inb" origUse="variable"/>
+            <arg id="2" name="incsc" addressQualifier="4" port="INCSC_V" hostOffset="0x0" hostSize="0x8" offset="0x18" size="0x8" type="stream&lt;ap_uint&lt;16&gt;, 0&gt;&amp;" memSize="0x2" origName="incsc" origUse="variable"/>
+            <arg id="3" name="row_kernel" addressQualifier="4" port="ROW_KERNEL_V" hostOffset="0x0" hostSize="0x8" offset="0x24" size="0x8" type="stream&lt;ap_uint&lt;16&gt;, 0&gt;&amp;" memSize="0x2" origName="row_kernel" origUse="variable"/>
+            <arg id="4" name="out" addressQualifier="4" port="OUT_V" hostOffset="0x0" hostSize="0x8" offset="0x30" size="0x8" type="stream&lt;ap_uint&lt;16&gt;, 0&gt;&amp;" memSize="0x2" origName="out" origUse="variable"/>
+        </args>
+        <compileWorkGroupSize x="1" y="1" z="1"/>
+        <maxWorkGroupSize x="1" y="1" z="1"/>
+    </kernel>
+</root>
+

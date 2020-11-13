@@ -1,3 +1,5 @@
 # BlockMM
 
-Version 3 - (CSR-DNS)
+1) HLS
+2) RTL
+3) RISC V
